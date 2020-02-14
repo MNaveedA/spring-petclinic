@@ -18,7 +18,10 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-  job: Build
+stages:
+- stage: Build
+  displayName: Build stage
+- job: Build
   displayName: Build Maven Project
   steps:
   - task: Maven@3
@@ -34,6 +37,11 @@ steps:
   - upload: $(Build.ArtifactStagingDirectory)
     artifact: drop
 
+    
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
 jobs:
 - deployment: VMDeploy
   displayName: web
