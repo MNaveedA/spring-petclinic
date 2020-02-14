@@ -1,3 +1,9 @@
+ trigger:
+  - master
+
+  pool:
+    vmImage: 'Ubuntu-16.04'
+
 - job: Build
   displayName: Build Maven Project
   steps:
